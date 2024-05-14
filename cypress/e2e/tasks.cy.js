@@ -32,4 +32,16 @@ describe('Validação da aplicação MarkL, criação de tarefas', () => {
         .should('be.visible')
         .should('have.text', 'Task already exists!')
     })
+
+    it('campo obrigatorio', ()=> {
+        cy.createTask()
+        cy.get('input[placeholder="Add a new Task"]')
+            .invoke('prop', 'validationMessage')
+            .should((text) => {
+                expect(
+                    'Thi is a required field'
+                )
+            })
+    })
+
 })
