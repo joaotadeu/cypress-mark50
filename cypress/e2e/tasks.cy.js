@@ -2,6 +2,14 @@
 
 describe('Gestão de Tarefas', () => {
 
+    let testData;
+
+    before(()=> {
+        cy.fixture('tasks').then(t =>{
+            testData = t
+        })
+    })
+
     context('Cadastro de tarefas', () => {
         it('deve cadastrar uma nova tarefa', () => {
 
@@ -20,10 +28,7 @@ describe('Gestão de Tarefas', () => {
     
         it('não deve permitir tarefas duplicadas', () => {
     
-            const task = {
-                name: 'Ler um livro de Js',
-                is_done: false
-            }
+            const task = testData.dup
             
             cy.removeTaskByName(task.name)
             cy.postTask(task)
@@ -51,7 +56,7 @@ describe('Gestão de Tarefas', () => {
             cy.removeTaskByName(task.name)
             cy.postTask(task)
 
-            cy.visit('http://localhost:3000/')
+            cy.visit('/')
 
             cy.contains('p', task.name)
                 .parent()
@@ -74,7 +79,7 @@ describe('Gestão de Tarefas', () => {
             cy.removeTaskByName(task.name)
             cy.postTask(task)
 
-            cy.visit('http://localhost:3000/')
+            cy.visit('/')
 
             cy.contains('p', task.name)
                 .parent()
