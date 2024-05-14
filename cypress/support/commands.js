@@ -13,7 +13,6 @@ Cypress.Commands.add('createTask', (taskName = '')=> {
 })
 
 Cypress.Commands.add('isRequired', (targetMessage) => {
-
     cy.createTask()
     cy.get('@inputTask')
         .invoke('prop', 'validationMessage')
@@ -22,6 +21,7 @@ Cypress.Commands.add('isRequired', (targetMessage) => {
                 targetMessage
             ).to.eq(text)
         })
+        
 })
 
 Cypress.Commands.add('removeTaskByName', (taskName)=> {
